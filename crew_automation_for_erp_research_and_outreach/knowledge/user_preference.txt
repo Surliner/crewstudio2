@@ -1,0 +1,4 @@
+User name is John Doe.
+User is an CEO or CIO.
+User is interested in ERP systems.
+User is based in PACA, France.

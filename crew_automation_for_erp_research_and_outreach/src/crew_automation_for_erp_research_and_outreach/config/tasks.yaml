@@ -1,0 +1,76 @@
+---
+data_collection_task:
+  description: 'Collect and enrich  {company_name} data to identify potential ERP Sage X3 clients.
+      For each company, retrieve:
+        - Official details ( {company_name},{siren}, {city}, {activity_type}, {website_url}.
+        - All accessible information about the decision maker and their contact information mainly from linkedin and google search
+        - Website & headquarters & subsidiaries or branches
+        - Number of employees & annual revenue
+        - Current ERP system in use
+        - Recent digital transformation projects or tech investments
+      Data should be structured and verifiable.'
+  expected_output: 'A comprehensive report detailing the company current business activities, 
+    IT/ERP systems, financial results, and cultural insights for {company_name} with the siren {siren}.
+    Very important to gather all the information about the decision maker and their contact information
+    and their social media pages. You also gather any other contact information related to {company_name}.
+    Generate a markdown formatted report.'
+  async_execution: false
+  agent: 'company_data_researcher'
+person_identification_task:
+  description:  'Identify decision-makers within the company to target for ERP Sage X3 sales.
+      Given a company name and details from data_collection_task, retrieve :
+        - C-Level Executives (CFO, CIO, CEO)
+        - IT and Finance Directors
+        - ERP Managers or Digital Transformation Heads
+        - LinkedIn profiles & contact info
+        - Email patterns or direct contacts
+        - Any other contact information related to {company_name} and {website_url} and {siren}'
+  expected_output: 'A detailed profile of the identified decision maker and company members, including role and 
+    seniority, their contact information and their social media pages, their linkedin profile and email address, 
+    their professional history and their current role. You also provide their phone number or email adress. You also provide found 
+    related to the company. Generate a markdown formatted profile list of the decision maker.'
+  async_execution: false
+  agent: 'person_identifier'
+  context:
+  - 'data_collection_task'
+benefit_idea_generation_task:
+  description: 'Based on the data collected from {company_name} and the decision maker
+    profile, generate actionable and tailored ideas on how Sage X3 and its ecosystem and 
+    its features could benefit {company_name} considering its {activity_type} and the information
+    gathered from {website_url}.'
+  expected_output: 'A well presented explanation of specific benefit ideas for leveraging Sage X3 tailored
+    to the needs and characteristics of {company_name} with actionnable steps and metrics 
+    to measure the success of the implementation. Generate a markdown formatted presentation of benefit ideas.'
+  async_execution: false
+  agent: 'email_report_generator'
+  context:
+  - 'data_collection_task'
+  - 'person_identification_task'
+email_drafting_task:
+  description: 'Draft a friendly , simple, and slightly fun email addressed to the identified
+    decision maker that succinctly highlights the 
+    benefit ideas and invites them to a call to discuss potential solutions for {company_name} and its {activity_type}. 
+    Ensure personalized and engaging language with a call to action to schedule a meeting to discuss the benefits of Sage X3.'
+  expected_output: 'The final ready-to-send email content with no subject, not too long and clearly
+    inviting the decision maker to a call and summarizing the benefit ideas for Sage
+    X3. Generate a markdown formatted email with the subject "Meeting request: Discussing Sage X3
+    Benefits for {company_name} - Arcanes.info" and the email content properly formatted. The email must be written in french.'
+  async_execution: false
+  agent: 'email_report_generator'
+  context:
+  - 'benefit_idea_generation_task'
+  - 'person_identification_task'
+  - 'data_collection_task'
+report_summary_task:
+  description: 'Create a markdown formatted report that summarizes the most important information gathered
+    for {company_name} and its subsidiaries or branches and its decision makers.'
+  expected_output: 'A detailed markdown report summarizing key insights about {company_name} and 
+    its subsidiaries or branches and its decision makers. Including current business activities trends,
+    IT/ERP information, financial results, cultural aspects and social media presence. Generate a markdown formatted report.'
+  async_execution: false
+  agent: 'email_report_generator'
+  context:
+  - 'data_collection_task'
+  - 'person_identification_task'
+  - 'benefit_idea_generation_task'
+  - 'email_drafting_task'

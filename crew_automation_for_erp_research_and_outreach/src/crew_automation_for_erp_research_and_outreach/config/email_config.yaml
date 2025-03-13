@@ -1,0 +1,6 @@
+---
+# SMTP Configuration
+smtp_server: "smtp.gmail.com"  # Gmail SMTP server
+smtp_port: 587
+smtp_username: ${SMTP_USERNAME}  # Will be loaded from environment variable
+smtp_password: ${SMTP_PASSWORD}  # Will be loaded from environment variable 

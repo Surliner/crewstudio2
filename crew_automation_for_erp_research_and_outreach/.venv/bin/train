@@ -1,0 +1,8 @@
+#!/Users/jeanduhamel/Documents/Code_storage/crewstudio2/crew_automation_for_erp_research_and_outreach/.venv/bin/python3.12
+# -*- coding: utf-8 -*-
+import re
+import sys
+from crew_automation_for_erp_research_and_outreach.main import train
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(train())

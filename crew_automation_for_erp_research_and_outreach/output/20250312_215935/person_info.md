@@ -1,0 +1,1 @@
+The detailed profile of Benjamin Richel, CEO of RICHEL GROUP, including roles, contact information, LinkedIn presence, and professional history.

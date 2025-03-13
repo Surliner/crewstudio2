@@ -1,0 +1,2 @@
+RAGNI specializes in public lighting solutions and is involved in recent partnerships to expand its market presence, particularly in North America. The company is led by decision makers like Julie MERIAUX as the Communications Events Manager. Additional insights about their financial health and internal culture require further exploration or direct engagement with the company through provided official channels.
+```
