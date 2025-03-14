@@ -8,7 +8,7 @@ class CrewAutomationForErpResearchAndOutreachCrew:
     def __init__(self):
         # Configure OpenAI
         os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-        os.environ["SERPER_API_KEY"] = st.secrets["SERPER_API_KEY"]
+        os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
         
         self.company_researcher = Agent(
             role='Company Data Researcher',
