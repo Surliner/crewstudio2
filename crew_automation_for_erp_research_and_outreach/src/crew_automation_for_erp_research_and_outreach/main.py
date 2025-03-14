@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import sys
-from crew_automation_for_erp_research_and_outreach.crew import CrewAutomationForErpResearchAndOutreachCrew
+import os
+from pathlib import Path
+from .crew import CrewAutomationForErpResearchAndOutreachCrew
 
 # This main file is intended to be a way for your to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -20,10 +22,10 @@ def run(inputs=None):
     
     # Create and run the crew
     crew_instance = CrewAutomationForErpResearchAndOutreachCrew()
-    crew_instance.crew().kickoff(inputs=inputs)
+    result = crew_instance.crew().kickoff(inputs=inputs)
     
-    # Return the output directory path
-    return crew_instance.output_dir
+    # Return the result
+    return result
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -33,7 +35,6 @@ if __name__ == "__main__":
     command = sys.argv[1]
     if command == "run":
         run()
-
     else:
         print(f"Unknown command: {command}")
         sys.exit(1)
