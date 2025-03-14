@@ -1,15 +1,22 @@
+import streamlit as st
 from crewai import Agent, Task, Crew, Process
 from langchain.tools import Tool
 from typing import Dict, Any
+import os
 
 class CrewAutomationForErpResearchAndOutreachCrew:
     def __init__(self):
+        # Configure OpenAI
+        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+        os.environ["SERPER_API_KEY"] = st.secrets["SERPER_API_KEY"]
+        
         self.company_researcher = Agent(
             role='Company Data Researcher',
             goal='Research company information and ERP usage',
             backstory='Expert at finding and analyzing company information',
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            memory=False  # Disable memory to avoid ChromaDB dependency
         )
         
         self.erp_specialist = Agent(
@@ -17,7 +24,8 @@ class CrewAutomationForErpResearchAndOutreachCrew:
             goal='Analyze ERP needs and opportunities',
             backstory='Expert in ERP systems and business processes',
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            memory=False  # Disable memory to avoid ChromaDB dependency
         )
         
         self.content_creator = Agent(
@@ -25,7 +33,8 @@ class CrewAutomationForErpResearchAndOutreachCrew:
             goal='Create compelling content for outreach',
             backstory='Expert in creating persuasive business content',
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            memory=False  # Disable memory to avoid ChromaDB dependency
         )
 
     def crew(self) -> Crew:
